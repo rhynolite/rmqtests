@@ -6,7 +6,7 @@ export RABBITMQ_NODE_PORT=5672
 # Node name 
 export RABBITMQ_NODENAME=rabbit1
 #The path to the configuration file, without the .config extension. If the configuration file is present it is used by the server to configure RabbitMQ components. See Configuration guide for more information.
-export RABBITMQ_CONFIG_FILE=${RABBITMQ_BASE}/config
+export RABBITMQ_CONFIG_FILE=${RABBITMQ_BASE}/server
 #This base directory contains sub-directories for the RabbitMQ server's Mnesia database files, one for each node, unless RABBITMQ_MNESIA_DIR is set explicitly. (In addition to Mnesia files this location also contains message storage and index files as well as schema and cluster details.)
 export RABBITMQ_MNESIA_BASE=${RABBITMQ_BASE}/mnesia.d	
 #The directory where this RabbitMQ node's Mnesia database files are placed. (In addition to Mnesia files this location also contains message storage and index files as well as schema and cluster details.)
