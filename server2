@@ -1,0 +1,36 @@
+#!/bin/sh
+#This base directory contains sub-directories for the RabbitMQ server's database and log files. Alternatively, set RABBITMQ_MNESIA_BASE and RABBITMQ_LOG_BASE individually.
+export RABBITMQ_BASE=server2.d
+# Port to listen on 
+export RABBITMQ_NODE_PORT=5673
+# Node name 
+export RABBITMQ_NODENAME=rabbit2
+#The path to the configuration file, without the .config extension. If the configuration file is present it is used by the server to configure RabbitMQ components. See Configuration guide for more information.
+export RABBITMQ_CONFIG_FILE=${RABBITMQ_BASE}/config
+#This base directory contains sub-directories for the RabbitMQ server's Mnesia database files, one for each node, unless RABBITMQ_MNESIA_DIR is set explicitly. (In addition to Mnesia files this location also contains message storage and index files as well as schema and cluster details.)
+export RABBITMQ_MNESIA_BASE=${RABBITMQ_BASE}/mnesia.d	
+#The directory where this RabbitMQ node's Mnesia database files are placed. (In addition to Mnesia files this location also contains message storage and index files as well as schema and cluster details.)
+export RABBITMQ_MNESIA_DIR=${RABBITMQ_MNESIA_BASE}/db.d 	
+#This base directory contains the RabbitMQ server's log files, unless RABBITMQ_LOGS or RABBITMQ_SASL_LOGS are set explicitly.
+export RABBITMQ_LOG_BASE=${RABBITMQ_BASE}/logs 	
+#The path of the RabbitMQ server's Erlang log file. This variable cannot be overridden on Windows.
+#export RABBITMQ_LOGS 	
+#The path of the RabbitMQ server's Erlang SASL (System Application Support Libraries) log file. This variable cannot be overridden on Windows.
+#export RABBITMQ_SASL_LOGS 	
+#The directory in which the plugins are found.
+export RABBITMQ_PLUGINS_DIR=${RABBITMQ_BASE}/plugins
+#Working directory used to expand enabled plugins when starting the server.
+export RABBITMQ_PLUGINS_EXPAND_DIR=${RABBITMQ_BASE}/plugins.expanded	
+#This file records explicitly enabled plugins.
+export RABBITMQ_ENABLED_PLUGINS_FILE=${RABBITMQ_PLUGINS_DIR}/enabled
+#File in which the process id is placed for use by rabbitmqctl wait. 
+export RABBITMQ_PID_FILE=${RABBITMQ_BASE}/pid 	
+
+
+# Create all directories 
+if [ "x${RABBITMQ_BASE}" = "x" ] ; then 
+	echo "RABBITMQ_BASE is not set"
+	exit 1 
+else 
+	env | egrep '^RABBITMQ.*DIR' | awk -F\= '{print $2}' | xargs mkdir -p
+fi

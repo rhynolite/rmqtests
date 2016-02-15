@@ -1,0 +1,9 @@
+#!/bin/sh 
+ENVNAME=$1
+shift
+#PATH=/usr/local/Cellar/rabbitmq/3.5.6/sbin/:${PATH}
+PATH=/Users/omer/rabbitmq/2.7/src/rabbitmq_server-2.7.1/sbin/:${PATH}
+
+source $ENVNAME 
+
+exec "$@"
